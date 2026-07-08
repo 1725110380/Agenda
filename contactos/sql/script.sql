@@ -9,7 +9,8 @@ CREATE TABLE contactos(
 
 INSERT INTO contactos(nombre,primer_apellido,segundo_apellido,email,telefono)
 VALUES
-('Dejah','Thoris','Barsonn','dejah@email.com','111111111'),
-('John','Carter','Earth','john@email.com','22222222');
+('Emmanuel','Rivera','Uribe','emma@email.com','111111111'),
+('Patricio','Estrella','Lopez','Patricio@email.com','22222222');
+
 
 SELECT * FROM contactos;

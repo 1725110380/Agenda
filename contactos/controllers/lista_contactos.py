@@ -3,46 +3,39 @@ import sqlite3
 
 render = web.template.render('views', base='layout')
 
-class lista_contactos:
+class ListaContactos:
 
-    def obtenerContactos(self):
+    def consultarContactos(self):
         try:
-            # Conecta a la base de datos
-            conn = sqlite3.connect('sql/agenda.db')
-            cursor = conn.cursor()
-            # Consulta los registros de la tabla contactos
+            conexion = sqlite3.connect("sql/agenda.db")
+            conexion.row_factory = sqlite3.Row
+            cursor = conexion.cursor()
             query = "SELECT * FROM contactos;"
             cursor.execute(query)
-            # Crea un array vacio para almacenar los registros
-            contactos = []
-            # Almacena cada registro en un diccionario
-            for row in cursor.fetchall():
+            resultado = cursor.fetchall()
+
+            datos = []
+            for fila in resultado:
                 contacto = {
-                    'id_contacto': row[0],
-                    'nombre': row[1],
-                    'primer_apellido': row[2],
-                    'segundo_apellido': row[3],
-                    'email': row[4],
-                    'telefono': row[5]
+                    "id_contacto":fila[0],
+                    "nombre":fila[1],
+                    "primer_apellido":fila[2],
+                    "segundo_apellido":fila[3],
+                    "email":fila[4],
+                    "telefono":fila[5]
                 }
-                # Agrega el diccionario creado al array
-                contactos.append(contacto)
+                datos.append(contacto)
 
-            # Cierra la conexión a la base de datos
-            conn.close()
-
-            return contactos
+            conexion.close()
+            print(datos)
+            return datos
         except sqlite3.Error as error:
             print(f"ERROR 100: {error.args}")
             return []
         except Exception as error:
             print(f"ERROR 101: {error.args}")
             return []
-        finally:
-            conn.close()
-
 
     def GET(self):
-        contactos = self.obtenerContactos()
-        # print(contactos)
+        contactos = self.consultarContactos()
         return render.lista_contactos(contactos)

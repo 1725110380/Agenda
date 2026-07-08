@@ -1,0 +1,27 @@
+$def with(contacto)
+
+<h1>Eliminar Contacto</h1>
+<a href="/lista_contactos">Volver</a>
+
+    <h2>¿Estás seguro de que deseas eliminar este contacto?</h2>
+    
+    <p><strong>Esta acción no se puede deshacer.</strong></p>
+    
+    <div style="background-color: white; padding: 15px; border-radius: 5px; margin: 20px 0;">
+        <p><strong>ID:</strong> $contacto['id_contacto']</p>
+        <p><strong>Nombre:</strong> $contacto['nombre']</p>
+        <p><strong>Primer Apellido:</strong> $contacto['primer_apellido']</p>
+        <p><strong>Segundo Apellido:</strong> $contacto['segundo_apellido']</p>
+        <p><strong>Email:</strong> $contacto['email']</p>
+        <p><strong>Teléfono:</strong> $contacto['telefono']</p>
+
+
+    <form method="POST">
+        <button type="submit">
+            Confirmar Eliminación
+        </button>
+        <a href="/lista_contactos"><button type="button">
+            Cancelar
+        </button></a>
+    </form>
+</div>
